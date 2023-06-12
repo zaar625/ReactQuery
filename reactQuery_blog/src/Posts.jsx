@@ -31,7 +31,6 @@ function Posts() {
     keepPreviousData:true
   })
 
-  console.log(data);
 
   if(isLoading) return <h3>Loading... ... </h3>;
   
