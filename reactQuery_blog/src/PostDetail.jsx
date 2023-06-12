@@ -1,5 +1,7 @@
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {useEffect} from 'react';
+import PropTypes from 'prop-types'
+
 
 async function fetchComments(postId){
   const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
@@ -71,5 +73,11 @@ if(isError) {
     </>
   )
 }
+
+PostDetail.propTypes = {
+  post: {
+    id: PropTypes.number.isRequired
+  }
+};
 
 export default PostDetail
