@@ -12,7 +12,7 @@ function InfiniteSpecies() {
         return response.json();
     }
 
-    const {data, isLoading, isError, error, isFetching} = useInfiniteQuery(['sw-species'],({pageParam = initialUrl}) => fetchUrl(pageParam),{
+    const {data, isLoading, isError, error, isFetching, fetchNextPage, hasNextPage} = useInfiniteQuery(['sw-species'],({pageParam = initialUrl}) => fetchUrl(pageParam),{
         getNextPageParam:(lastPage) => lastPage.next || undefined
     })
 
@@ -23,7 +23,7 @@ function InfiniteSpecies() {
   return (
     <>
         {isFetching && <div className="loading">Loading...</div>}
-        <InfiniteScroll>
+        <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
             {data.pages.map((pageData)=> {
                 return pageData.results.map((species)=> {
                     return <Species key={species.name} name={species.name} language={species.language} averageLifespan={species.average_lifespan}/>
